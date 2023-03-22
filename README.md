@@ -15,13 +15,14 @@ Important Things to Know:
 
 
 <details>
-<summary>Installation</summary>
+<summary>Installation (reproductability)</summary>
 <br>
+Using Python 3.8, and installing the following packages (we used aconda env with CUDA 13 with RTX 3090 and i10 processors) 
+~Hasn't been tested on other PCs yet~
 
 ```
+pip install matplotlib==3.7.1, numpy==1.24.2, tensordict==0.0.2b0
 pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.pytorch.org/whl/torch_stable.html
 ```
-
-![name-of-you-image](notebook_results/Test002_recoloured.png)
 </details>
 
