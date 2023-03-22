@@ -2,10 +2,11 @@
 
 This is the code-base for the research paper. TBD
 
-Predicted scenes represented as point-clouds can be constructed with matplotlib as shown below:
+In this repository we run the Case Study experiment presented in [paper]. This evaluates the use of different activation functions for NeRF-INRs of depth learning. We look at SIREN, WIRE and Gauss without positional encoders, as well as ReLU with positional encoder. Each network is tested using the _Whole Scene Average Predition Error_ (WSAPE), and results can be visualised as (1) 3D point clouds, (2) image render of depth map. (e.g.) Below we show the predicted point-cloud using SIREN activation and the depth map renders for `epochs=2000` and `lr=1e-5` (using `Adam` for optimisation and MSE for loss)
 
 ![siren](https://user-images.githubusercontent.com/64833452/226962178-ceef5a4f-6317-40eb-9703-5dc7a7eaa622.gif)
 
+![render_image_results](https://user-images.githubusercontent.com/64833452/226964305-d9648e73-537b-4e16-a798-a265f570663e.png)
 
 
 <details>
