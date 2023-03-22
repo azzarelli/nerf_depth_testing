@@ -12,7 +12,6 @@ from torch import nn
 from trainer import Trainer
 from utils_ import Accuracy, Loss, Planes, Ray, RayBundle, build_block, get_view_rays
 
-from nerfstudio.fields.implicit_surface_field import ISField
 
 """Define a class for generating and displaying a scene
 """
@@ -64,8 +63,8 @@ class Scene:
         # Define Views: Camera Scale, Shift (relative to x-z), rotation
         r1 = Ray((8.,1.,6.), (0.,12.,1.), (-.2, -0., 0.))
         r2 = Ray((8.,1.,6.), (8.,10.,0.), (0., -.0, +.6))
-        r3 = Ray((8.,1.,6.), (3.,10.,-5.), (+0.4, -.0, +.2)
-        r_groups = [ r1 , r2,r3] 
+        r3 = Ray((8.,1.,6.), (3.,10.,-5.), (+0.4, -.0, +.2))
+        r_groups = [ r1 , r2, r3] 
 
         # Get rays from ray-view function
         rays = []
@@ -331,7 +330,7 @@ class Scene:
         assert self.rays is not None
         torch.save(self.rays, f'save_data/rays_{name}.pt')
         
-        assert self.target_data is not None
+        assert self.target_data is not None, self.target_data
         targs = tensordict.TensorDict(self.target_data, [])
         torch.save(targs, f'save_data/targs_{name}.pt')
 
@@ -379,7 +378,6 @@ class Scene:
         """
         print('Generate Target Data...')
         self.target_data = self.generate_target_data()
-
         if save != '':
             self.save_data(save)
 

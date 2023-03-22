@@ -1,10 +1,7 @@
-from dataclasses import dataclass
 from math import log10, sqrt
 
 import numpy as np
 import torch
-
-from nerfstudio.utils.tensor_dataclass import TensorDataclass
 
 """Accuracy : Rather than taking boolean accuracy we take the average error for any prediction
 """
@@ -40,16 +37,18 @@ def Accuracy_elementwise(preds, n_t):
 
 """ Loss function:
 """
-def Loss(looser, preds, n_t, f_t):
+def Loss(looser, preds, n_t):
     n_pred = preds[:,0]
 
-    # return (looser(n_t, n_pred))  +looser(f_t, f_pred)
     return looser(n_t, n_pred)
 
-@dataclass
-class RayBundle(TensorDataclass):
+class RayBundle():
     origins: torch.Tensor
     directions: torch.Tensor
+
+    def __init__(self, origins, directions):
+        self.origins = origins
+        self.directions = directions
 
 """Define the plane of a cuboid in our scene
     Properties:

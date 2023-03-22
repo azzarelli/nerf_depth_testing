@@ -10,9 +10,8 @@ from modules.wire import Wire_INR
 from scene import Scene
 from trainer import Trainer
 
-from nerfstudio.fields.implicit_surface_field import ISField
 
-experiment_title = 'FinalResults'
+experiment_title = 'Put Your Title Here'
 net_names = ['SIREN', 'WIRE', 'RELU', 'Gauss']
 
 # Eh these things...
@@ -137,11 +136,11 @@ for net_name in net_names:
     scene.load_trainer(experiment_title+net_name)
 
     
-    # scene.display_pred_scene(title=experiment_title, view_scale=(8,8,8), show_rays=False)
+    scene.display_pred_scene(title=experiment_title, view_scale=(8,8,8), show_rays=False)
 
     """Rendering Images for each Model
     """
-    res = scene.disp_heatmap(title=experiment_title,show_GT_intersections=True)
+    res = scene.disp_heatmap(title=experiment_title)
 
     res_.append(res[:3]) # appendd to results
     gt = res[3:] # ground truth

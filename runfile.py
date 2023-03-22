@@ -27,8 +27,8 @@ scene.set_trainer(Trainer(title=experiment_title))
 
 # Training Params
 lr = 1e-5
-epochs = 2000
-print_frequency = 50
+epochs = 20
+print_frequency = 20
 test_frequency = 20
 
 batch_data = {'train':256,'test':512} 

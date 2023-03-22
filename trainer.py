@@ -106,7 +106,7 @@ class Trainer:
 
         n, f = targs
 
-        loss = Loss(self.looser, outputs, n, f)
+        loss = Loss(self.looser, outputs, n)
 
         self.optimizer.zero_grad()
         loss.backward()
@@ -121,7 +121,7 @@ class Trainer:
 
         n, f = targs
 
-        accuracy = Accuracy(outputs, n, f)
+        accuracy = Accuracy(outputs, n)
         psnr = PSNR(outputs, n)
 
         return accuracy.item(), psnr
