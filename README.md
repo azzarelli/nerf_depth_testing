@@ -2,6 +2,12 @@
 
 This is the code-base for the research paper. TBD
 
+Predicted scenes represented as point-clouds can be constructed with matplotlib as shown below:
+
+![siren](https://user-images.githubusercontent.com/64833452/226962178-ceef5a4f-6317-40eb-9703-5dc7a7eaa622.gif)
+
+
+
 <details>
 <summary>Folders/Files</summary>
 <br>
