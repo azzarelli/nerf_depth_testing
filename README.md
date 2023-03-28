@@ -1,4 +1,4 @@
-# Testing NeRFS as INRs of Depth
+# Testing NeRFs as INRs of Depth
 
 This is the code-base for the research paper. TBD
 
