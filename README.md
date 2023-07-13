@@ -16,6 +16,8 @@ Each network is tested using the _Whole Scene Average Predition Error_ (WSAPE), 
 
 The quantative results are provided below, which compares WSAPE and PSNR on this task, showing that WSAPE is much better for this evaluation method.
 
+(Warning: Results need to be updated!)
+
 ![psnr_waspe](https://user-images.githubusercontent.com/64833452/226965838-3cefe4ea-bff7-42f8-bc1e-02ca4683f66a.PNG)
 
 
