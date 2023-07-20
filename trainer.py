@@ -33,7 +33,7 @@ class Trainer:
         optim = torch.optim.Adam,
         looser = torch.nn.MSELoss(),
 
-        epochs=20, 
+        epochs=1500, 
         test_frequency=20,
         print_frequeny = 20,
         lr = 1e-5,
@@ -82,7 +82,7 @@ class Trainer:
         """
         tt_data_ratio=self.test_train_split 
         batch_data=self.batch_data
-
+        
         rays = rays[torch.randperm(rays.size()[0])] # random shuffle
                 
         train_data = rays[:int(rays.size(0)*tt_data_ratio)]
@@ -187,6 +187,7 @@ class Trainer:
                                             get_targs_fn(oris, dirs, targs),
                                             data
                                         )
+                            print(accuracy)
                             last_accuracy = accuracy
                             last_psnr = psnr
                             accuracy_track.append(accuracy)
@@ -196,6 +197,8 @@ class Trainer:
                             break
             
             if print_frequeny != 0 and ((e+1)%print_frequeny)==0:
+                print ('Epoch [{}/{}],  Loss: {:.4f}'.format(e+1, epochs,last_loss))
+
                 print ('Epoch [{}/{}], Accuracy: {:.4f}, PSNR: {:.4f}'.format(e+1, epochs, last_accuracy, last_psnr))
 
             self.trackers = {'loss':loss_track, 'accuracy':accuracy_track, 'psnr': psnr_track}
@@ -227,16 +230,16 @@ class Trainer:
                 yy = b[:, 1].tolist()
                 zz = b[:, 2].tolist()
                 verts = [list(zip(xx,yy,zz))]
-                ax.add_collection3d(Poly3DCollection(verts, alpha=.1, color='c')) # blocks_cols[i]''))
+                ax.add_collection3d(Poly3DCollection(verts, alpha=.05, color=blocks_cols[i])) # blocks_cols[i]''))
         # Rays:
         if display_rays is not None and rays_cols is not None:
             for r, col in zip(display_rays, rays_cols):
                 r[:,3:6] = r[:,3:6]/5. 
-                ax.quiver(r[:,0],r[:,1],r[:,2],r[:,3],r[:,4],r[:,5],  linewidth=.5, color='g', alpha=0.5)
+                ax.quiver(r[:,0],r[:,1],r[:,2],r[:,3],r[:,4],r[:,5],  linewidth=.5, color=col, alpha=0.5)
         # Intersection point cloud
         if display_intersections is not None:
             ax.scatter(display_intersections[:,0], display_intersections[:,1],
-                        display_intersections[:,2], c='k', s=2, alpha=alpha)
+                        display_intersections[:,2], c='k', s=2, alpha=1.)
         # Prediction point cloud
         if preds is not None:
             ax.scatter(preds[:,0],preds[:,1],preds[:,2], c='r', s=50, alpha=1.)
@@ -382,13 +385,13 @@ class Trainer:
             cnt_w = int(cnt/cnt_h)
             
             # Return three views
-            img0 = [[ [im0[((cnt_w-i-1)*cnt_h) + (j)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
-            img1 = [[ [im1[((cnt_w-i-1)*cnt_h) + (j)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
-            img2 = [[ [im2[((cnt_w-i-1)*cnt_h) + (j)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
+            img0 = [[ [im0[((cnt_w-i-1)*cnt_h) + (cnt_h-j-1)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
+            img1 = [[ [im1[((cnt_w-i-1)*cnt_h) + (cnt_h-j-1)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
+            img2 = [[ [im2[((cnt_w-i-1)*cnt_h) + (cnt_h-j-1)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
             # Return the GT views
-            gtimg0 = [[ [gt0[((cnt_w-i-1)*cnt_h) + (j)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
-            gtimg1 = [[ [gt1[((cnt_w-i-1)*cnt_h) + (j)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
-            gtimg2 = [[ [gt2[((cnt_w-i-1)*cnt_h) + (j)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
+            gtimg0 = [[ [gt0[((cnt_w-i-1)*cnt_h) + (cnt_h-j-1)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
+            gtimg1 = [[ [gt1[((cnt_w-i-1)*cnt_h) + (cnt_h-j-1)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
+            gtimg2 = [[ [gt2[((cnt_w-i-1)*cnt_h) + (cnt_h-j-1)] * 100.] for j in range(cnt_h)] for i in range(cnt_w)]
             
 
             return [img0, img1, img2, gtimg0, gtimg1, gtimg2]

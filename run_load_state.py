@@ -133,17 +133,17 @@ for net_name in net_names:
                 params["test_train_split"]
                 ) )
 
-    scene.load_trainer(experiment_title+net_name)
+    # scene.load_trainer(experiment_title+net_name)
 
     
-    scene.display_pred_scene(title=experiment_title, view_scale=(8,8,8), show_rays=False)
+    scene.display_scene(title=experiment_title, view_scale=(12,12,12), show_rays=False, show_cubes=False)
 
-    """Rendering Images for each Model
-    """
-    res = scene.disp_heatmap(title=experiment_title)
+    # """Rendering Images for each Model
+    # """
+    # res = scene.disp_heatmap(title=experiment_title)
 
-    res_.append(res[:3]) # appendd to results
-    gt = res[3:] # ground truth
+    # res_.append(res[:3]) # appendd to results
+    # gt = res[3:] # ground truth
 
 fig, axs = plt.subplots(3, 5, subplot_kw={'xticks': [], 'yticks': []}, figsize=(12, 9))
 

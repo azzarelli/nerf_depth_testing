@@ -9,9 +9,9 @@ from modules.siren import SIREN_INR
 from modules.wire import Wire_INR
 from scene import Scene
 from trainer import Trainer
-
+import random 
 # Set the Experiment Title
-experiment_title = 'Put Your Title Here'
+experiment_title = 'Redo 1'
 
 # Scene Handler
 scene = Scene()
@@ -22,14 +22,13 @@ scene.generate_data(experiment_title) # choose to generate data (saves using exp
 scene.set_trainer(Trainer(title=experiment_title))
 
 # Display Scene Prior to Training
-# scene.display_scene(title=experiment_title, show_GT_intersections=False, view_scale=(15,15,10))
-
+# scene.display_scene(title=experiment_title,  view_scale=(15,15,10))
 
 # Training Params
 lr = 1e-5
-epochs = 20
-print_frequency = 20
-test_frequency = 20
+epochs = 1500
+print_frequency = 100
+test_frequency = 100
 
 batch_data = {'train':256,'test':512} 
 test_train_split = 0.8
@@ -129,7 +128,7 @@ trackers = {}
 
 for thing in things:
     for idx, model in enumerate(model_params):
-        name = experiment_title+model['title'] # +'_'+(str(thing))
+        name = experiment_title+model['title'] +'_'+(str(thing))
         print(name)
 
         # Initialise and Run New trainer
@@ -148,6 +147,8 @@ for thing in things:
         
         trackers[name] = scene.run(title=experiment_title, load_data=True)
         scene.save_trainer()
+    torch.manual_seed(thing)
+
 
 
 # Plot Training Results (and Save)

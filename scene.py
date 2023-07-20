@@ -198,16 +198,6 @@ class Scene:
         on_surf_indices = (on_surf_mask > 0.).nonzero(as_tuple=True)
         
         on_surf_indices = torch.cat([on_surf_indices[0].unsqueeze(1), on_surf_indices[1].unsqueeze(1)], dim=1)
-        
-        # torch.set_printoptions(threshold=10_000)
-        # print(torch.cat([surf_min[2], r[2], on_surf_mask_min[2].unsqueeze(1).repeat(1,1)], dim=1))
-
-        # Select planer
-        # indices = []
-        # for o in on_surf_indices:
-        #     if o[0] == 2: # slect plane number (2 is bottom red box)
-        #         indices.append(o.cpu().tolist())
-        # on_surf_indices = torch.tensor(indices)
 
         return on_surf_indices
 
@@ -238,7 +228,7 @@ class Scene:
         """Get intersection of xyz, t and indices (ref to plane-ray matrix) form
         """
         # Set max distance as 1000. - arbitrary far-far distance
-        max_d = 1000.
+        max_d = 100.
         # tranfer intersections where our desired indices point
         ray_indices = torch.full_like(r, max_d).to(self.device)
         ray_indices[indices[:,0], indices[:,1]]  = r[indices[:,0], indices[:,1]]
